@@ -1,9 +1,15 @@
 [package]
 name = "procfd"
+authors = ["Vitaly Shupak <vitaly.shupak@deshaw.com>"]
+description = "procfd is a simple, fast, and user-friendly alternative to lsof on Linux to list process file descriptors"
+readme = "README.md"
+homepage = "https://github.com/deshaw/procfd"
+repository = "https://github.com/deshaw/procfd"
+license = "BSD-3-Clause"
+keywords = ["lsof", "lsfd", "procfs", "open-files"]
+categories = ["command-line-utilities", "os::linux-apis", "filesystem"]
 version = "1.0.4"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 procfs = "0.17.0"
