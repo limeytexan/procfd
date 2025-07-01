@@ -1,12 +1,12 @@
 # procfd
 
 ## Introduction
-procfd is a Linux tool to query open file descriptors for processes. It is a rust replacement for the `lsof` command. Compared to `lsof`, `procfd` features:
+procfd is a Linux tool to query open file descriptors for processes. It is a rust replacement for the `lsof` command. Compared to `lsof`, `procfd`:
 
-* Safe against blocking operations
-* Easy to use command-line options
-* Simple to use filters
-* Very fast
+* Is very fast
+* Is safe against blocking operations and never hangs
+* Has easy to use command-line options and filters
+* Shows endpoints of pipes and unix sockets by default
 * Can export data as json
 
 ## Examples
@@ -55,12 +55,36 @@ PID      | User     | Name | Type         | FD | Target
 * `procfd --no-dns` - Disable DNS lookups
 * `procfd --json` - Render results as JSON
 
+## Installation
+
+procfd is not yet available as a distro package, but you can install it using Cargo or download it from the Releases page
+
+### Cargo
+
+![Crates.io](https://img.shields.io/crates/v/procfd?link=https%3A%2F%2Fcrates.io%2Fcrates%2Fprocfd)
+
+procfd can be installed directly from crates.io with:
+```
+cargo install procfd
+```
+Cargo will build the `procfd` binary and place it in your `CARGO_INSTALL_ROOT`.
+For more details on installation location see [the cargo
+book](https://doc.rust-lang.org/cargo/commands/cargo-install.html#description).
+
+### Manual
+
+Download the binary on the [releases](https://github.com/deshaw/procfd/releases) page and put them in your $PATH. Or run the shell command:
+
+```shell
+wget -c https://github.com/deshaw/procfd/releases/latest/download/procfd-x86_64-unknown-linux-gnu.tar.gz -O - | tar xz
+```
+
 ## Comparison to lsof and lsfd
 
 * `lsof` is the original cross-platform command to list open file handles
 * `lsfd` is a Linux-only rewrite of `lsof` by one of the main contributors to `lsof` which addresses many usability issues with `lsof`
 
-Below is an incomplete comparison of these tools:
+Below is an incomplete (and biased) comparison of these tools:
 
 | Feature                          | procfd         | lsof                   | lsfd           |
 | -------------------------------- | -------------- | ---------------------- | -------------- |
@@ -68,25 +92,26 @@ Below is an incomplete comparison of these tools:
 | Platform support                 | Linux only     | Cross-platform         | Linux only     |
 | Speed                            | Very fast      | Variable [^1]          | Variable       |
 | JSON output                      | Yes            | No                     | Yes            |
-| Avoid blocking operations        | Yes            | Partial [^2]           | No             |
-| Display endpoint of unix sockets | Yes            | Very slow with -E flag | No             |
-| Display endpoint of pipes        | Yes            | Very slow with -E flag | Yes            |
-| Usability                        | Very easy      | Complicated            | Medium         |
-| Show memory maps                 | No[^3]         | Yes                    | Yes            |
-| Filter by expression             | No             | No                     | Yes            |
+| Avoids blocking operations       | Yes            | Partial [^2]           | No             |
+| Display endpoint of unix sockets | Yes            | Partial [^3]           | Partial        |
+| Display endpoint of pipes        | Yes            | Yes (with lsof -E)     | Yes            |
+| Usability                        | Easy           | Complicated            | Medium         |
+| Show memory maps                 | No[^4]         | Yes                    | Yes            |
+| Filter by expression             | No             | Partial                | Yes            |
 | DNS Lookups                      | Yes            | Yes                    | No             |
 | Show mount points                | No             | Yes                    | Yes            |
 | IPv6 support                     | Yes            | Yes                    | Yes            |
-| Filter by path                   | No[^4]         | Yes                    | Yes            |
+| Filter by path                   | No[^5]         | Yes                    | Yes            |
 | Filter by command                | Yes with regex | Yes exact match        | Yes with regex |
 | Filter by src/dst host/port      | Yes            | No                     | Yes            |
 
 ### Notes
 
-[^1]: Fast with local disks, but can be slow with lots of mounted network filesystems
-[^2]: `lsof -b` flag avoids blocking calls, but also fails to display any socket information
-[^3]: Not currently implemented but PRs welcome!
-[^4]: Not currently implemented, but can use grep to filter output of `procfd --type path`
+[^1]: Fast with local disks, but can be very slow with lots of mounted network filesystems
+[^2]: `lsof -b` avoids blocking calls, but also fails to display any socket information
+[^3]: `lsfd` and `lsof +E` display limited information about the socket endpoint including the command, socket number, and fd number, but not the socket endpoint path. `lsfd` may miss some endpoints if process filters are applied
+[^4]: Not currently implemented but PRs welcome!
+[^5]: Not currently implemented, but can use grep to filter output of `procfd --type path`
 
 ## History
 
