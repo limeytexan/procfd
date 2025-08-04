@@ -1,3 +1,13 @@
+# Changelog
+
+## 1.1.0 (2025-08-03)
+
+### Features
+- Add --pid-only flag to print just the matching PIDs (#2)
+
+### Bug Fixes
+- Unix socket can have multiple endpoints (#1)
+
 ## 1.0.4 (2025-06-28)
 
 ### Added
