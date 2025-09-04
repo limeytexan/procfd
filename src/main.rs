@@ -137,10 +137,20 @@ struct Args {
     no_dns: bool,
 
     // output options
-    #[clap(long, display_order = 15, conflicts_with = "pid_only", help = "Render results as JSON")]
+    #[clap(
+        long,
+        display_order = 15,
+        conflicts_with = "pid_only",
+        help = "Render results as JSON"
+    )]
     json: bool,
 
-    #[clap(long, display_order = 16, conflicts_with = "json", help = "Only show PIDs")]
+    #[clap(
+        long,
+        display_order = 16,
+        conflicts_with = "json",
+        help = "Only show PIDs"
+    )]
     pid_only: bool,
 }
 
@@ -304,8 +314,8 @@ impl fmt::Display for NetConnEntry {
             // IPv6 addresses are enclosed in []
             IpAddr::V6(_) => format!("[{ip}]"),
         };
-        let ipv4_zero_addr = IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0));
-        let ipv6_zero_addr = IpAddr::V6(Ipv6Addr::new(0, 0, 0, 0, 0, 0, 0, 0));
+        let ipv4_zero_addr = IpAddr::V4(Ipv4Addr::UNSPECIFIED);
+        let ipv6_zero_addr = IpAddr::V6(Ipv6Addr::UNSPECIFIED);
         let local_host = if self.local_host.is_empty() {
             format_ip(&self.local_ip)
         } else {
@@ -398,7 +408,12 @@ impl fmt::Display for UnixSocketEntry {
                 .map(|(_, endpoints)| {
                     let endpoints: Vec<&FDEndpoint> = endpoints.into_iter().collect();
                     let fds: Vec<String> = endpoints.iter().map(|e| e.fd.to_string()).collect();
-                    format!("{}[{}][{}]", endpoints[0].name, endpoints[0].pid, fds.join(","))
+                    format!(
+                        "{}[{}][{}]",
+                        endpoints[0].name,
+                        endpoints[0].pid,
+                        fds.join(",")
+                    )
                 })
                 .collect();
 
