@@ -8,9 +8,6 @@
       },
       "gcc": {
         "pkg-path": "gcc"
-      },
-      "glibc": {
-        "pkg-path": "glibc"
       }
     },
     "hook": {},
@@ -24,9 +21,6 @@
     "build": {
       "procfd": {
         "command": "  mkdir -p $out/bin\n  cargo build --release\n  cp target/release/procfd $out/bin\n",
-        "runtime-packages": [
-          "gcc"
-        ],
         "version": "0.0.1",
         "description": "Linux lsof replacement to list open file descriptors for processes"
       }
@@ -154,76 +148,6 @@
         "info": "/nix/store/12sy2qyk3qir1rg4jdrdnj91jaw50my2-gcc-wrapper-14.3.0-info",
         "man": "/nix/store/ds5j2vvwhdvfgkjp7jnfx82bqswks46x-gcc-wrapper-14.3.0-man",
         "out": "/nix/store/95k9rsn1zsw1yvir8mj824ldhf90i4qw-gcc-wrapper-14.3.0"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "glibc",
-      "broken": false,
-      "derivation": "/nix/store/16j7irwfq8alyr69h4v8q28kfc756lll-glibc-2.40-66.drv",
-      "description": "GNU C Library",
-      "install_id": "glibc",
-      "license": "LGPL-2.0-or-later",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=7df7ff7d8e00218376575f0acdcc5d66741351ee",
-      "name": "glibc-2.40-66",
-      "pname": "glibc",
-      "rev": "7df7ff7d8e00218376575f0acdcc5d66741351ee",
-      "rev_count": 870157,
-      "rev_date": "2025-10-02T04:57:58Z",
-      "scrape_date": "2025-10-03T04:56:39.578458Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2.40-66",
-      "outputs_to_install": [
-        "bin"
-      ],
-      "outputs": {
-        "bin": "/nix/store/lmpnr58n2diy0hhdkzjn8ndlskrhyrx2-glibc-2.40-66-bin",
-        "debug": "/nix/store/0mbrcgwin2jzfax6vvb3y1964qf0wny5-glibc-2.40-66-debug",
-        "dev": "/nix/store/21hfs53hjb8spgp3558dn7cr0phs38kf-glibc-2.40-66-dev",
-        "getent": "/nix/store/zwss4n52akml2ywl3g1jgr3fywwsbxh2-glibc-2.40-66-getent",
-        "out": "/nix/store/nl55hbsk5fjq2kyz3rkry1flndqfr3ry-glibc-2.40-66",
-        "static": "/nix/store/q47q8m5swkc0ylrlc8svfwan6hmkynsi-glibc-2.40-66-static"
-      },
-      "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "glibc",
-      "broken": false,
-      "derivation": "/nix/store/f1305aqkwkvrpxy69rxbvs54ixmlm1dq-glibc-2.40-66.drv",
-      "description": "GNU C Library",
-      "install_id": "glibc",
-      "license": "LGPL-2.0-or-later",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=7df7ff7d8e00218376575f0acdcc5d66741351ee",
-      "name": "glibc-2.40-66",
-      "pname": "glibc",
-      "rev": "7df7ff7d8e00218376575f0acdcc5d66741351ee",
-      "rev_count": 870157,
-      "rev_date": "2025-10-02T04:57:58Z",
-      "scrape_date": "2025-10-03T05:27:33.170164Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2.40-66",
-      "outputs_to_install": [
-        "bin"
-      ],
-      "outputs": {
-        "bin": "/nix/store/4jxivbjpr86wmsziqlf7iljlwjlxz8bh-glibc-2.40-66-bin",
-        "debug": "/nix/store/8z9gaz21k7n1p1ck771j72znq0gi2kwk-glibc-2.40-66-debug",
-        "dev": "/nix/store/gf3wh0x0rzb1dkx0wx1jvmipydwfzzd5-glibc-2.40-66-dev",
-        "getent": "/nix/store/n2k28lkawd29rjds56jnyq70pbdknilc-glibc-2.40-66-getent",
-        "out": "/nix/store/776irwlgfb65a782cxmyk61pck460fs9-glibc-2.40-66",
-        "static": "/nix/store/3cb2nbc588k52q5nv6hrb3qq4fh4hq00-glibc-2.40-66-static"
       },
       "system": "x86_64-linux",
       "group": "toplevel",

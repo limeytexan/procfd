@@ -17,7 +17,7 @@ version = 1
 [install]
 cargo.pkg-path = "cargo"
 gcc.pkg-path = "gcc"
-glibc.pkg-path = "glibc"
+# glibc.pkg-path = "glibc"
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 
@@ -85,7 +85,7 @@ glibc.pkg-path = "glibc"
 [build.procfd]
 description = "Linux lsof replacement to list open file descriptors for processes"
 version = "0.0.1"
-runtime-packages = [ "gcc" ]
+# runtime-packages = [ "gcc" ]
 command = """
   mkdir -p $out/bin
   cargo build --release
